@@ -1,9 +1,9 @@
 {
   "movies": [
     {
-      "id": 1,
       "title": "Shrek",
-      "rating": 5
+      "rating": 5,
+      "id": 1
     }
   ]
 }
