@@ -1,8 +1,9 @@
 //make a get request for the json server;
 
-let getMovies =
 
-    function (){
+
+
+function getMovies(){
     let html = '';
     $.ajax('http://localhost:3000/movies').done(data => {
         console.log(data)
@@ -13,8 +14,9 @@ let getMovies =
         html += '<input type="text" id="movieTitle"/>'
         html += '<input type="text" id="movieRating"/>'
         html += '<input type="submit" id="submitButton"/>'
-        html += '<form>'
+        html += '</form>'
         $('#container').html(html)
+        $('canvas').css('display', 'none')
     })
 }
 getMovies();
@@ -24,37 +26,14 @@ function addMovie(){
         type: "POST",
         data: {
             title: $('#movieTitle').val(),
-            rating: $('#movieRating').val()
+            rating: Number($('#movieRating').val())
         },
         dataType: 'json',
     }).done (data => data);
-    // html += `<div>${$('#movieTitle').val()}<br>${$('#movieRating').val()}</div>`
-    // $('#container').html = getMovies()
     getMovies();
-    // location.reload()
+    setTimer()
 }
 
-let timeOut =
-setTimeout(() => {
-    $('#submitButton').click(e => {
-        e.preventDefault();
-        addMovie()
-    })
-}, "1500");
-setTimeout(() => {
-    $('.editButton').click(e => {
-        e.preventDefault();
-        console.log(e)
-        let id = Number(e.target.id)
-        editMovie(id)
-    })
-}, "1500");
-
-
-let edittedMovie = {
-    title: 'pop',
-    rating: 4
-}
 function editMovie(id){
     fetch(`http://localhost:3000/movies/${id}`, {
         method: 'PUT',
@@ -66,8 +45,45 @@ function editMovie(id){
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+
+    getMovies();
 }
-editMovie(5)
+
+
+function setTimer () {
+    setTimeout(() => {
+    $('#submitButton').click(e => {
+        e.preventDefault();
+        addMovie()
+    })
+}, "1500");
+}
+setTimer();
+let editId;
+setTimeout(() => {
+    $('.editButton').click(e => {
+       $('#popUpScreen').css( 'display', 'flex')
+        editId = e.target.id
+    })
+}, "1500");
+
+let edittedMovie;
+setTimeout(() => {
+    $('#editSubmit').click(e => {
+        e.preventDefault();
+        let id = editId
+        edittedMovie = {
+            title : $('#editMovieTitle').val(),
+            rating : Number($('#editMovieRating').val())
+        }
+        editMovie(id)
+    })
+}, "0");
+
+
+
+
+
 
 
 // $('#submitButton').click(function (e) {
