@@ -1,6 +1,9 @@
 //make a get request for the json server;
-let html = '';
-(function getMovies(){
+
+let getMovies =
+
+    function (){
+    let html = '';
     $.ajax('http://localhost:3000/movies').done(data => {
         console.log(data)
         data.forEach( (data) => {
@@ -13,27 +16,41 @@ let html = '';
         html += '<form>'
         $('#container').html(html)
     })
-})()
+}
+getMovies();
 
 function addMovie(){
     $.ajax("http://localhost:3000/movies", {
         type: "POST",
         data: {
-            title: $('#movie-title').val(),
-            ratings: $('#movie-rating').val()
+            title: $('#movieTitle').val(),
+            rating: $('#movieRating').val()
         },
-        dataType: json,
-    });
+        dataType: 'json',
+    }).done (data => data);
+    // html += `<div>${$('#movieTitle').val()}<br>${$('#movieRating').val()}</div>`
+    // $('#container').html = getMovies()
+    getMovies();
+    // location.reload()
 }
 
-
+let timeOut =
 setTimeout(() => {
-    $('#form').click(e => {
+    $('#submitButton').click(e => {
         e.preventDefault();
-        alert("hello")
+        addMovie()
     })
 }, "1500");
-
+function editMovie(title,rating){
+    
+}
+fetch('http://localhost:3000/movies', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify()
+})
 
 // $('#submitButton').click(function (e) {
 //     e.preventDefault();
