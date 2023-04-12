@@ -15,6 +15,16 @@ let html = '';
     })
 })()
 
+function addMovie(){
+    $.ajax("http://localhost:3000/movies", {
+        type: "POST",
+        data: {
+            title: $('#movie-title').val(),
+            ratings: $('#movie-rating').val()
+        },
+        dataType: json,
+    });
+}
 
 
 setTimeout(() => {
