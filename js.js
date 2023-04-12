@@ -8,7 +8,7 @@ function getMovies(){
     $.ajax('http://localhost:3000/movies').done(data => {
         console.log(data)
         data.forEach( (data) => {
-            html += `<div>${data.title}<br>${data.rating}<button id="${data.id}" class="editButton">edit</button></div>`
+            html += `<div>${data.title}<br>${data.rating}<button id="${data.id}" class="editButton">edit</button><button id="${data.id}" class="deleteButton">Delete</button></div>`
         })
         html +='<form id="form">'
         html += '<input type="text" id="movieTitle"/>'
@@ -79,7 +79,24 @@ setTimeout(() => {
         editMovie(id)
     })
 }, "0");
+function deleteMovie(id) {
+    fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'DELETE'
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.error(error));
 
+    getMovies()
+}
+setTimeout(() => {
+    $('.deleteButton').click(e => {
+        editId = e.target.id
+        deleteMovie(editId)
+    })
+}, "1500");
 
 
 
