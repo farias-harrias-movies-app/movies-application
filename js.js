@@ -7,7 +7,7 @@ let getMovies =
     $.ajax('http://localhost:3000/movies').done(data => {
         console.log(data)
         data.forEach( (data) => {
-            html += `<div>${data.title}<br>${data.rating}</div>`
+            html += `<div>${data.title}<br>${data.rating}<button id="${data.id}" class="editButton">edit</button></div>`
         })
         html +='<form id="form">'
         html += '<input type="text" id="movieTitle"/>'
@@ -41,16 +41,34 @@ setTimeout(() => {
         addMovie()
     })
 }, "1500");
-function editMovie(title,rating){
-    
+setTimeout(() => {
+    $('.editButton').click(e => {
+        e.preventDefault();
+        console.log(e)
+        let id = Number(e.target.id)
+        editMovie(id)
+    })
+}, "1500");
+
+
+let edittedMovie = {
+    title: 'pop',
+    rating: 4
 }
-fetch('http://localhost:3000/movies', {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify()
-})
+function editMovie(id){
+    fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(edittedMovie)
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+}
+editMovie(5)
+
 
 // $('#submitButton').click(function (e) {
 //     e.preventDefault();
