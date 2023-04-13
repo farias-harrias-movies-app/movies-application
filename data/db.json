@@ -36,7 +36,7 @@
       "id": 7
     },
     {
-      "title": "TMNT II: Secret of The Ooze",
+      "title": "Teenage Mutant Ninja Turtles II: The Secret of the Ooze",
       "rating": 5,
       "id": 8
     },
@@ -56,7 +56,7 @@
       "id": 11
     },
     {
-      "title": "Iron Fist 3",
+      "title": "Iron Fist",
       "rating": "3",
       "id": 12
     },
@@ -71,9 +71,14 @@
       "id": 14
     },
     {
-      "title": "driven",
+      "title": "Driven",
       "rating": "5",
       "id": 15
+    },
+    {
+      "title": "The Avengers",
+      "rating": "5",
+      "id": 16
     }
   ]
 }
