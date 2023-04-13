@@ -2,17 +2,22 @@
 let edittedMovie;
 let editId;
 let joiner;
+let x;
+let movieId = [];
+let link;
+let html = '';
+
+{setTimeout(() => {x = link},1500)}
 
 
-function getMovies(){
+let getMovies = async () => {
     //this resets the html variable
-    let html = '';
-    $.ajax('http://localhost:3000/movies').done(data => {
+    $.ajax('http://localhost:3000/movies').done(async data => {
         console.log(data)
         //cycles through the array of movies
         data.forEach( (data) => {
             html += '<div class="card" style="width: 20rem;">'
-            html += '<img src ="..." className ="card-img-top" alt ="..." >'
+            html += `<img src ="${x}" class="card-img-top imgs" alt ="..." >`
             html += `<h3>${data.title}</h3>`
             html += `<p>Rating: ${data.rating}</p>`
             html += '<div class="buttonHolder">'
@@ -20,18 +25,20 @@ function getMovies(){
             html += `<button id="${data.id}" class="deleteButton cardButton">Delete</button>`
             html += '</div>'
             html += '</div>'
+            movieId.push(data.id)
         })
         html +='<form id="form">'
         html += '<input type="text" id="movieTitle"/>'
         html += '<input type="text" id="movieRating"/>'
         html += '<input type="submit" id="submitButton"/>'
         html += '</form>'
+        console.log($('#container'))
         $('#container').html(html)
         //hides the loading page
         $('canvas').css('display', 'none')
     })
 }
-getMovies();
+setTimeout(() => {getMovies()},400)
 
 //this accepts value and post the data
 function addMovie(){
@@ -62,17 +69,7 @@ function editMovie(id){
     getMovies();
 }
 
-function setTimer () {
-    setTimeout(() => {
-    $('#submitButton').click(e => {
-        e.preventDefault();
-        addMovie()
-    })
-}, "1500");
-}
-setTimer();
-
-function deleteMovie(id) {
+function deleteMovie(editId) {
     fetch(`http://localhost:3000/movies/${id}`, {
         method: 'DELETE'
     })
@@ -85,34 +82,48 @@ function deleteMovie(id) {
     getMovies()
 }
 
-let id = 5;
-function getMovieSearch (id){
-    fetch(`http://localhost:3000/movies/${id}`, {
+function setTimer () {
+    setTimeout(() => {
+    $('#submitButton').click(e => {
+        e.preventDefault();
+        addMovie()
+        renderImgs()
+    })
+}, "1800");
+}
+setTimer();
+
+
+function renderImgs (){
+    setTimeout( () => {
+    movieId.forEach( y => {
+    let getMovieImg = async (y) => {
+    console.log(y)
+    await fetch(`http://localhost:3000/movies/${y}`, {
         method: 'GET'
     })
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
             // console.log(data);
             let spliter = (data.title.split(' '))
             joiner = spliter.join('+')
             console.log(joiner)
+            await fetch(`http://www.omdbapi.com/?apikey=${MOVIE_TOKEN}&t=${joiner.trim()}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    link = data.Poster;
+                })
         })
         .catch(error => console.error(error));
 
-    return joiner;
+    let imgs = $('.imgs')
+    imgs[y - 1].src = link
+    }
+    getMovieImg(y)
+    })
+    },1700)
 }
-
-
-setTimeout(() => {
-    console.log(getMovieSearch(id));
-}, 1500)
-
-
-// function getImage(id){
-//     fetch(`http://www.omdbapi.com/?apikey=${MOVIE_TOKEN}&t=${getMovieSearch(id)}`)
-//         .then(resp => resp)
-//         .then(data => console.log(data))
-// }
+renderImgs();
 
 setTimeout(() => {
     $('.editButton').click(e => {
@@ -120,7 +131,6 @@ setTimeout(() => {
         editId = e.target.id
     })
 }, "1500");
-
 
 setTimeout(() => {
     $('#editSubmit').click(e => {
@@ -135,16 +145,15 @@ setTimeout(() => {
 }, "0");
 
 setTimeout(() => {
-    $('.deleteButton').click(e => {
-        editId = e.target.id
-        deleteMovie(editId)
+    let deleteButton = Array.from($('.deleteButton'))
+    deleteButton.forEach(x => {
+        x.click(e => {
+            e.preventDefault();
+            editId = e.target.id
+            deleteMovie(editId)
+        })
     })
-}, "1500");
-
-
-
-
-
+}, "2000")
 
 // $('#submitButton').click(function (e) {
 //     e.preventDefault();
