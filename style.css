@@ -3,23 +3,76 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: #181818;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('img/elegant-retro-film.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+
 }
-#popUpScreen{
-    display: none;
-}
-.card{
+
+.card {
+    width: 100%;
+    text-align: center;
     align-items: center;
-    background-color: #292929;
+    background-color: #093f86;
     color: #fff;
+    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.5);
+    margin: 10px;
 }
-.cardButton{
-    border: 2px solid #fff;
+
+.cardButton {
+    border: 2px solid darkgrey;
     border-radius: 5px;
     padding: 2.3px;
+    background-color: darkgrey;
 }
-.deleteButton{
+
+.cardButton:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.deleteButton {
     margin-left: 1rem;
     margin-bottom: 1rem;
+    background-color: #d9534f;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
 }
+
+#container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cardButton:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.deleteButton {
+    background-color: #d9534f;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.card {
+    margin: 10px;
+}
+
+
+

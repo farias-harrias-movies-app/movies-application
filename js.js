@@ -16,7 +16,7 @@ let getMovies = async () => {
         console.log(data)
         //cycles through the array of movies
         data.forEach( (data) => {
-            html += '<div class="card" style="width: 20rem;">'
+            html += '<div class="card" style="width: 300px;">'
             html += `<img src ="${x}" class="card-img-top imgs" alt ="..." >`
             html += `<h3>${data.title}</h3>`
             html += `<p>Rating: ${data.rating}</p>`
