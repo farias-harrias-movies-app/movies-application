@@ -48,6 +48,7 @@ body {
 }
 
 #container {
+    justify-content: center;
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -94,4 +95,14 @@ body {
 .offcanvas-body, .offcanvas-header{
     background-color: #444444;
     color: #fff;
+}
+@media (max-width: 768px) {
+    /* Styles for screens smaller than 768px */
+    .card {
+        width: 90%;
+        margin: 5%;
+    }
+    .inputBox {
+        width: 90%;
+    }
 }
