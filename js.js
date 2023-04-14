@@ -5,12 +5,13 @@ let joiner;
 let x;
 let movieId = [];
 let link;
-let html = '';
 
-{setTimeout(() => {x = link},1500)}
+
+{setTimeout(() => {x = link},1300)}
 
 
 let getMovies = async () => {
+    let html = '';
     //this resets the html variable
     $.ajax('http://localhost:3000/movies').done(async data => {
         console.log(data)
@@ -21,24 +22,19 @@ let getMovies = async () => {
             html += `<h3>${data.title}</h3>`
             html += `<p>Rating: ${data.rating}</p>`
             html += '<div class="buttonHolder">'
-            html += `<button id="${data.id}" class="editButton cardButton">Edit</button>`
+            html += `<button id="${data.id}" class="editButton cardButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Edit</button>`
             html += `<button id="${data.id}" class="deleteButton cardButton">Delete</button>`
             html += '</div>'
             html += '</div>'
             movieId.push(data.id)
         })
-        html +='<form id="form">'
-        html += '<input type="text" id="movieTitle"/>'
-        html += '<input type="text" id="movieRating"/>'
-        html += '<input type="submit" id="submitButton"/>'
-        html += '</form>'
         console.log($('#container'))
         $('#container').html(html)
         //hides the loading page
         $('canvas').css('display', 'none')
     })
 }
-setTimeout(() => {getMovies()},400)
+getMovies()
 
 //this accepts value and post the data
 function addMovie(){
@@ -51,7 +47,7 @@ function addMovie(){
         dataType: 'json',
     }).done (data => data);
     getMovies();
-    setTimer()
+    setTimer();
 }
 
 function editMovie(id){
@@ -69,7 +65,7 @@ function editMovie(id){
     getMovies();
 }
 
-function deleteMovie(editId) {
+function deleteMovie(id) {
     fetch(`http://localhost:3000/movies/${id}`, {
         method: 'DELETE'
     })
@@ -79,7 +75,7 @@ function deleteMovie(editId) {
         })
         .catch(error => console.error(error));
 
-    getMovies()
+    setTimeout(() => {getMovies()},400)
 }
 
 function setTimer () {
@@ -89,7 +85,7 @@ function setTimer () {
         addMovie()
         renderImgs()
     })
-}, "1800");
+}, 1500);
 }
 setTimer();
 
@@ -123,7 +119,7 @@ function renderImgs (){
     })
     },1700)
 }
-renderImgs();
+// renderImgs();
 
 setTimeout(() => {
     $('.editButton').click(e => {
@@ -142,26 +138,25 @@ setTimeout(() => {
         }
         editMovie(id)
     })
-}, "0");
+}, 0);
 
 setTimeout(() => {
-    let deleteButton = Array.from($('.deleteButton'))
-    deleteButton.forEach(x => {
-        x.click(e => {
+        $('.deleteButton').click( e => {
             e.preventDefault();
-            editId = e.target.id
+            editId = e.target.id;
+            console.log(editId)
             deleteMovie(editId)
         })
+}, 5000)
+
+setTimeout(() => {
+    $('.editButton').click( e => {
+        e.preventDefault();
+        editId = e.target.id;
+        console.log('hi')
+        $('#popUpScreen').css('display', 'flex')
     })
-}, "2000")
-
-// $('#submitButton').click(function (e) {
-//     e.preventDefault();
-// })
-// const r = document.getElementById("submitButton")
-// r.addEventListener('click', (e) => {e.preventDefault();
-// })
-
+}, 5000)
 
 //create boxes to display movie using json object
 //create a form for adding new objects to the json server
