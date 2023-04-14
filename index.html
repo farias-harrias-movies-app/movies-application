@@ -8,15 +8,47 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/223166d288.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-ticket" style="color: #a7acb4;"></i>
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
+            Add New Movie
+        </button>
+    </div>
+</nav>
+
 <div id="container"></div>
-<!--<div id="popUpScreen">-->
-<!--    <h3>Movie</h3>-->
-<!--    <input type="text" id="editMovieTitle" name="movieTitle">-->
-<!--    <input type="text" id="editMovieRating" name="movieRating">-->
-<!--    <button id="editSubmit">Submit</button>-->
-<!--</div>-->
+
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Alter Selected Movie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <input type="text" id="editMovieTitle" name="movieTitle" placeholder="Type altered name" class="inputBox"><br>
+        <input type="text" id="editMovieRating" name="movieRating" placeholder="Type altered rating" class="inputBox"><br>
+        <button id="editSubmit" class="canvasBtn">Submit</button>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel2">Add Movie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+                <input type="text" id="movieTitle" class="inputBox" placeholder="Enter new movie title"/><br>
+                <input type="text" id="movieRating" class="inputBox" placeholder="Enter new movie title"/><br>
+                <button id="submitButton" class="canvasBtn">Submit</button>
+        </div>
+    </div>
+</div>
 
 <!-- Create a canvas element to draw on -->
 <canvas id="matrix-canvas"></canvas>
@@ -71,11 +103,5 @@
 <script src="./keys.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="./js.js"></script>
-<div id="popUpScreen">
-    <h3>Movie</h3>
-    <input type="text" id="editMovieTitle" name="movieTitle">
-    <input type="text" id="editMovieRating" name="movieRating">
-    <button id="editSubmit">Submit</button>
-</div>
 </body>
 </html>
