@@ -30,24 +30,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <input type="text" id="editMovieTitle" name="movieTitle" placeholder="Type altered name"><br>
-        <input type="text" id="editMovieRating" name="movieRating" placeholder="Type altered rating"><br>
-        <button id="editSubmit">Submit</button>
+        <input type="text" id="editMovieTitle" name="movieTitle" placeholder="Type altered name" class="inputBox"><br>
+        <input type="text" id="editMovieRating" name="movieRating" placeholder="Type altered rating" class="inputBox"><br>
+        <button id="editSubmit" class="canvasBtn">Submit</button>
     </div>
 </div>
 
 <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="staticBackdropLabel2">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="staticBackdropLabel2">Add Movie</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div>
-            <form id="form">
-                <input type="text" id="movieTitle"/>
-                <input type="text" id="movieRating"/>
-                <input type="submit" id="submitButton"/>
-            </form>
+                <input type="text" id="movieTitle" class="inputBox" placeholder="Enter new movie title"/><br>
+                <input type="text" id="movieRating" class="inputBox" placeholder="Enter new movie title"/><br>
+                <button id="submitButton" class="canvasBtn">Submit</button>
         </div>
     </div>
 </div>

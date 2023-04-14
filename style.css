@@ -74,16 +74,24 @@ body {
     margin: 10px;
 }
 
-#editMovieTitle {
-    margin-bottom: 8px;
-    width: 75%;
-}
-
-#editMovieRating {
+.inputBox {
     margin-bottom: 8px;
     width: 75%;
 }
 
 .navbar {
     background-color: #1d1d1d;
+}
+
+.canvasBtn{
+    background-color: #d9534f;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.offcanvas-body, .offcanvas-header{
+    background-color: #444444;
+    color: #fff;
 }
