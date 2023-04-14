@@ -74,8 +74,6 @@ function deleteMovie(id) {
             console.log(data);
         })
         .catch(error => console.error(error));
-
-    setTimeout(() => {getMovies()},400)
 }
 
 function setTimer () {
@@ -117,7 +115,7 @@ function renderImgs (){
     }
     getMovieImg(y)
     })
-    },1700)
+    },1300)
 }
 // renderImgs();
 
@@ -128,7 +126,6 @@ setTimeout(() => {
     })
 }, "1500");
 
-setTimeout(() => {
     $('#editSubmit').click(e => {
         e.preventDefault();
         let id = editId
@@ -138,7 +135,6 @@ setTimeout(() => {
         }
         editMovie(id)
     })
-}, 0);
 
 setTimeout(() => {
         $('.deleteButton').click( e => {
